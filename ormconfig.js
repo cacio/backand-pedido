@@ -1,10 +1,6 @@
-{
+module.exports = {
     "type":"postgres",
-    "host":"localhost",
-    "port":"5432",
-    "username":"postgres",
-    "password":"admin",
-    "database":"prodapedidos",
+    "url":process.env.DATABASE_URL,
     "migrations":[
         "./dist/database/migrations/*.ts"
     ],
