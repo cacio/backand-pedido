@@ -45,12 +45,18 @@ exports.default = {
         });
         const users = await usuarioRepository.findOne({ where: { email } });
         if (!users) {
-            return response.sendStatus(401);
+            return response.sendStatus(401).json({
+                status: "error",
+                message: "Email or password incorret!"
+            });
             //throw new Error("Email or password incorret!");            
         }
         const isValidPassword = await bcryptjs_1.default.compare(passwd, users.passwd);
         if (!isValidPassword) {
-            return response.sendStatus(401);
+            return response.sendStatus(401).json({
+                status: "error",
+                message: "Email or password incorret!"
+            });
             //throw new Error("Email or password incorret!");
         }
         const token = jsonwebtoken_1.default.sign({ id: users.id }, 'Pr0d@5Iq', { expiresIn: '1d' });
