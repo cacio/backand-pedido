@@ -33,16 +33,16 @@ export default{
         const users = await usuarioRepository.findOne({where:{email}});
 
         if(!users){
-            //return response.sendStatus(401);
-            throw new Error("Email or password incorret!");            
+            return response.sendStatus(401);
+            //throw new Error("Email or password incorret!");            
         }
 
 
         const isValidPassword = await bcrypt.compare(passwd,users.passwd);
 
         if(!isValidPassword){
-            //return response.sendStatus(401);
-            throw new Error("Email or password incorret!");
+            return response.sendStatus(401);
+            //throw new Error("Email or password incorret!");
         }
 
 
