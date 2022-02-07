@@ -45,7 +45,7 @@ exports.default = {
         });
         const users = await usuarioRepository.findOne({ where: { email } });
         if (!users) {
-            return response.sendStatus(401).json({
+            return response.status(401).json({
                 status: "error",
                 message: "Email or password incorret!"
             });
@@ -53,7 +53,7 @@ exports.default = {
         }
         const isValidPassword = await bcryptjs_1.default.compare(passwd, users.passwd);
         if (!isValidPassword) {
-            return response.sendStatus(401).json({
+            return response.status(401).json({
                 status: "error",
                 message: "Email or password incorret!"
             });
