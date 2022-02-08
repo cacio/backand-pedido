@@ -1,6 +1,6 @@
 module.exports = {
     "type":"postgres",
-    "url":process.env.HEROKU_POSTGRESQL_BLACK_URL,
+    "url":process.env.DATABASE_URL,
     "ssl":false,
     "migrations":[
         "./dist/database/migrations/*.ts"
