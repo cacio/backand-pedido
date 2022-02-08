@@ -5,14 +5,14 @@ import produtos_view from '../Views/produtos_view';
 import * as Yup from 'yup';
 
 export default{
-    async ListaProdutoAlterado(lastPulledVersion:Number){
+    async ListaProdutoAlterado(lastPulledVersion:String){
         const produtoRepository = getRepository(Produtos);
 
         const produtoAlterado = await produtoRepository.createQueryBuilder().where("updated_at >= :lastPulledVersion AND updated_at <> created_at",{ lastPulledVersion }).getMany();
 
         return produtos_view.renderMany(produtoAlterado);
     },
-    async ListaProdutoCriado(lastPulledVersion:Number){
+    async ListaProdutoCriado(lastPulledVersion:String){
         const produtoRepository = getRepository(Produtos);
         
         const produtoCriado = await produtoRepository.find({

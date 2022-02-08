@@ -29,15 +29,15 @@ export default{
 
     },
     
-    async ListaClienteAlterado(lastPulledVersion:Number){
+    async ListaClienteAlterado(lastPulledVersion:String){
         const clienteRepository = getRepository(clientes);
-
+        
         const clienteUpdate = await clienteRepository.createQueryBuilder().where("updated_at >= :lastPulledVersion AND updated_at <> created_at",{ lastPulledVersion }).getMany();
 
         return clienteUpdate;
     },
 
-    async ListaClientesCriado(lastPulledVersion:Number){
+    async ListaClientesCriado(lastPulledVersion:String){
         const clienteRepository = getRepository(clientes);
         
         const clienteCriado = await clienteRepository.find({

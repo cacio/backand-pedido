@@ -5,14 +5,14 @@ import CondicoesPagamento from '../models/CondicoesPagamento';
 import CondicoesPagamento_view from '../Views/CondicoesPagamento_view';
 
 export default{
-    async ListaProdutoAlterado(lastPulledVersion:Number){
+    async ListaProdutoAlterado(lastPulledVersion:String){
         const condicoespagamentoRepository = getRepository(CondicoesPagamento);
 
         const condicoesPagamentoAlterado = await condicoespagamentoRepository.createQueryBuilder().where("updated_at >= :lastPulledVersion AND updated_at <> created_at",{ lastPulledVersion }).getMany();
 
         return CondicoesPagamento_view.renderMany(condicoesPagamentoAlterado);
     },
-    async ListaCondicoesPagamentoCriado(lastPulledVersion:Number){
+    async ListaCondicoesPagamentoCriado(lastPulledVersion:String){
         const condicoespagamentoRepository = getRepository(CondicoesPagamento);
         
         const condicoesPagamentoCriado = await condicoespagamentoRepository.find({

@@ -6,20 +6,37 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const ClientesControllers_1 = __importDefault(require("./ClientesControllers"));
 const CondicoesPagamentoController_1 = __importDefault(require("./CondicoesPagamentoController"));
 const ProdutoControllers_1 = __importDefault(require("./ProdutoControllers"));
+const moment_1 = __importDefault(require("moment"));
 exports.default = {
     async asyncClientes(request, response) {
         const { lastPulledVersion } = request.query;
+        let dataFormatted = "";
+        //console.log(lastPulledVersion);
+        if (lastPulledVersion != "null") {
+            //console.log('entro aqui');
+            const datalastpull = new Date(Number(lastPulledVersion));
+            let formattedDate = ((0, moment_1.default)(datalastpull)).format('YYYY-MM-DD HH:mm:ss');
+            dataFormatted = formattedDate;
+        }
+        else {
+            console.log('entro aqui 2');
+            const datalastpull = new Date();
+            let formattedDate = ((0, moment_1.default)(datalastpull)).format('YYYY-MM-DD');
+            //console.log(formattedDate);
+            dataFormatted = formattedDate + ' 00:00:00';
+        }
+        //console.log("data formatada: "+dataFormatted);
         /*Dados de Cliente*/
-        const updated = await ClientesControllers_1.default.ListaClienteAlterado(Number(lastPulledVersion));
-        const created = await ClientesControllers_1.default.ListaClientesCriado(Number(lastPulledVersion));
+        const updated = await ClientesControllers_1.default.ListaClienteAlterado(String(dataFormatted));
+        const created = await ClientesControllers_1.default.ListaClientesCriado(String(dataFormatted));
         const clientes = {
             created,
             updated,
             deleted: [],
         };
         /*Dados de Produto*/
-        const updateProduto = await ProdutoControllers_1.default.ListaProdutoAlterado(Number(lastPulledVersion));
-        const createdProduto = await ProdutoControllers_1.default.ListaProdutoCriado(Number(lastPulledVersion));
+        const updateProduto = await ProdutoControllers_1.default.ListaProdutoAlterado(String(dataFormatted));
+        const createdProduto = await ProdutoControllers_1.default.ListaProdutoCriado(String(dataFormatted));
         const produtos = {
             created: createdProduto,
             updated: updateProduto,
@@ -28,8 +45,8 @@ exports.default = {
         /*
           Dados de condiçoes de pagamento
         */
-        const updateCondicoespagamento = await CondicoesPagamentoController_1.default.ListaProdutoAlterado(Number(lastPulledVersion));
-        const createCondicoespagamento = await CondicoesPagamentoController_1.default.ListaCondicoesPagamentoCriado(Number(lastPulledVersion));
+        const updateCondicoespagamento = await CondicoesPagamentoController_1.default.ListaProdutoAlterado(String(dataFormatted));
+        const createCondicoespagamento = await CondicoesPagamentoController_1.default.ListaCondicoesPagamentoCriado(String(dataFormatted));
         const condicoes_pagamento = {
             created: createCondicoespagamento,
             updated: updateCondicoespagamento,
@@ -43,5 +60,5 @@ exports.default = {
                 condicoes_pagamento
             }
         });
-    }
+    },
 };
