@@ -1,7 +1,7 @@
 module.exports = {    
     "type":"postgres",
     "url":process.env.DATABASE_URL,
-    "extra": {"ssl": { "rejectUnauthorized": true }},
+    "extra": {"ssl": { "rejectUnauthorized": false }},
     "migrations":[
         "./dist/database/migrations/*.js"
     ],
