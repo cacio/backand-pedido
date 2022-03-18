@@ -88,7 +88,7 @@ export default{
         const users = await usuarioRepository.findOne({where:{cod_repre,cnpj_emp}});
         
         if(users){
-            return response.status(500).json({
+            return response.status(201).json({
                 status:"error",
                 message:"Representante ja exite na base de dados da empresa"
             });
