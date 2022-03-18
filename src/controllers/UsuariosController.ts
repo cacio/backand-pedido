@@ -81,8 +81,8 @@ export default{
 
     },
     async VrificaUsuarioCNPJ(request: Request,response: Response){
-        const { cnpj_emp,cod_repre } = request.query;
-        
+        const { cnpj_emp,cod_repre } = request.params;
+            console.log(request.params);
         const usuarioRepository = getRepository(Usuario);
 
         const users = await usuarioRepository.findOne({where:{cod_repre,cnpj_emp}});
