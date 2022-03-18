@@ -79,6 +79,26 @@ export default{
 
         return response.status(201).json(clientes);
 
+    },
+    async VrificaUsuarioCNPJ(request: Request,response: Response){
+        const { cnpj_emp,cod_repre } = request.body;
+
+        const usuarioRepository = getRepository(Usuario);
+
+        const users = await usuarioRepository.findOne({where:{cod_repre,cnpj_emp}});
+        
+        if(users){
+            return response.status(500).json({
+                status:"error",
+                message:"Representante ja exite na base de dados da empresa"
+            });
+        }
+
+        return response.status(201).json({
+            status:"sucesso",
+            message:"Usuario não existe para essa empresa"
+        });
+
     }
 
 };

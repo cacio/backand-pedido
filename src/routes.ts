@@ -13,6 +13,7 @@ const routes = Router();
 * Usuario
 */
 routes.get('/usuarios',UsuariosController.Index);
+routes.get('/usuarios/verifica',UsuariosController.VrificaUsuarioCNPJ);
 routes.get('/usuarios/:id',AuthMiddleware,UsuariosController.show);
 routes.post('/usuarios', UsuariosController.create);
 routes.post('/usuarios/async', UsuariosController.asyncupdate);
