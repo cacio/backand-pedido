@@ -96,7 +96,7 @@ export default{
 
         return response.status(201).json({
             status:"sucesso",
-            message:"Usuario não existe para essa empresa"
+            message:"Usuario não existe para essa empresa "+cnpj_emp+" "
         });
 
     }
