@@ -11,5 +11,23 @@ exports.default = {
         const duplicreceberRepository = (0, typeorm_1.getRepository)(DuplicReceber_1.default);
         const duplicreceber = await duplicreceberRepository.find();
         return response.json(DuplicReceber_view_1.default.renderMany(duplicreceber));
+    },
+    async show(request, response) {
+    },
+    async create(request, response) {
+        const { codigo, ndup, vlrdup, vencdup, cod_cli, forma_pagamento, cnpj_emp } = request.body;
+        const data = {
+            codigo,
+            ndup,
+            vlrdup,
+            vencdup,
+            cod_cli,
+            forma_pagamento,
+            cnpj_emp
+        };
+        const duplicreceberRepository = (0, typeorm_1.getRepository)(DuplicReceber_1.default);
+        const duplicrecebers = duplicreceberRepository.create(data);
+        await duplicreceberRepository.save(duplicrecebers);
+        return response.status(201).json(duplicrecebers);
     }
 };

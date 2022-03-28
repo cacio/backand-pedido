@@ -6,6 +6,7 @@ import ClientesControllers from './controllers/ClientesControllers';
 import AsyncController from './controllers/AsyncController';
 import ProdutoControllers from './controllers/ProdutoControllers';
 import CondicoesPagamentoController from './controllers/CondicoesPagamentoController';
+import DuplicReceberControllers from './controllers/DuplicReceberControllers';
 
 const routes = Router();
 
@@ -35,8 +36,11 @@ routes.post('/produtos',ProdutoControllers.create);
 /*
 *  Condições de pagamento
 */
-
 routes.post('/condicoes_pagamento',CondicoesPagamentoController.create);
+/*
+*   Duplic receber 
+*/
+routes.get('/duplicreceber',DuplicReceberControllers.Index);
 
 
 export default routes;

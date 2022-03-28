@@ -11,6 +11,30 @@ export default{
 
         return response.json(DuplicReceber_view.renderMany(duplicreceber));
 
+    },
+    async show(request: Request,response: Response){
+
+    },
+    async create(request: Request,response: Response){
+        const {codigo,ndup,vlrdup,vencdup,cod_cli,forma_pagamento,cnpj_emp} = request.body;
+
+        const data = {
+            codigo,
+            ndup,
+            vlrdup,
+            vencdup,
+            cod_cli,
+            forma_pagamento,
+            cnpj_emp
+        }
+
+        const duplicreceberRepository = getRepository(DuplicReceber);
+
+        const duplicrecebers = duplicreceberRepository.create(data);
+
+        await duplicreceberRepository.save(duplicrecebers);
+
+        return response.status(201).json(duplicrecebers);
     }
 
 }
