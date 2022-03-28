@@ -17,6 +17,7 @@ const routes = (0, express_1.Router)();
 */
 routes.get('/usuarios', UsuariosController_1.default.Index);
 routes.get('/usuarios/:id', AuthMiddleware_1.default, UsuariosController_1.default.show);
+routes.post('/usuarios/verifica', UsuariosController_1.default.VrificaUsuarioCNPJ);
 routes.post('/usuarios', UsuariosController_1.default.create);
 routes.post('/usuarios/async', UsuariosController_1.default.asyncupdate);
 routes.post('/auth', AuthController_1.default.Authenticate);

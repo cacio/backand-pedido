@@ -79,5 +79,20 @@ exports.default = {
         };
         const clientes = await usuarioRepository.createQueryBuilder().update(Usuario_1.default).set(data).where('id=:id', { id: user_id }).execute();
         return response.status(201).json(clientes);
+    },
+    async VrificaUsuarioCNPJ(request, response) {
+        const { cnpj_emp, cod_repre } = request.body;
+        const usuarioRepository = (0, typeorm_1.getRepository)(Usuario_1.default);
+        const users = await usuarioRepository.findOne({ where: { cod_repre, cnpj_emp } });
+        if (users) {
+            return response.status(201).json({
+                status: "error",
+                message: "Representante ja exite na base de dados da empresa"
+            });
+        }
+        return response.status(201).json({
+            status: "sucesso",
+            message: "Usuario não existe para essa empresa " + cnpj_emp + " "
+        });
     }
 };
