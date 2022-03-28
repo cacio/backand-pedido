@@ -41,4 +41,5 @@ routes.post('/condicoes_pagamento', CondicoesPagamentoController_1.default.creat
 *   Duplic receber
 */
 routes.get('/duplicreceber', DuplicReceberControllers_1.default.Index);
+routes.post('/duplicreceber', DuplicReceberControllers_1.default.create);
 exports.default = routes;
