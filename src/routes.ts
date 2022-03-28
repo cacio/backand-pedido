@@ -37,10 +37,11 @@ routes.post('/produtos',ProdutoControllers.create);
 *  Condições de pagamento
 */
 routes.post('/condicoes_pagamento',CondicoesPagamentoController.create);
+
 /*
 *   Duplic receber 
 */
 routes.get('/duplicreceber',DuplicReceberControllers.Index);
-
+routes.post('/duplicreceber', DuplicReceberControllers.create);
 
 export default routes;
