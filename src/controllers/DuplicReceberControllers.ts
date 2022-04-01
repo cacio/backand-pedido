@@ -1,5 +1,5 @@
 import {Request,Response} from 'express';
-import { getRepository } from 'typeorm';
+import { getRepository,MoreThan } from 'typeorm';
 import DuplicReceber from '../models/DuplicReceber';
 import DuplicReceber_view from '../Views/DuplicReceber_view';
 
@@ -35,6 +35,22 @@ export default{
         await duplicreceberRepository.save(duplicrecebers);
 
         return response.status(201).json(duplicrecebers);
+    },
+    async ListaDuplicReceberAlterado(lastPulledVersion:String){
+        const duplicreceberRepository = getRepository(DuplicReceber);
+
+        const  duplicreceberAlterado = await duplicreceberRepository.createQueryBuilder().where("updated_at >= :lastPulledVersion AND updated_at <> created_at",{ lastPulledVersion }).getMany();
+
+        return DuplicReceber_view.renderMany(duplicreceberAlterado);
+    },
+    async ListaDuplicReceberCriado(lastPulledVersion:String){
+        const duplicreceberRepository = getRepository(DuplicReceber);
+        
+        const duplicreceberCriado = await duplicreceberRepository.find({
+            created_at: MoreThan(lastPulledVersion)      
+          });
+
+          return DuplicReceber_view.renderMany(duplicreceberCriado);
     }
 
 }

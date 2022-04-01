@@ -3,6 +3,7 @@ import { getRepository,MoreThan } from 'typeorm';
 import ClientesControllers from './ClientesControllers';
 import CondicoesPagamentoController from './CondicoesPagamentoController';
 import ProdutoControllers from './ProdutoControllers';
+import DuplicReceberControllers from './DuplicReceberControllers';
 import  moment from 'moment';
 
 export default{
@@ -64,12 +65,25 @@ export default{
             deleted: [],
           }
 
+          /**
+            Dados de Duplictas a receber
+          */
+          const updateDuplicReceber = await DuplicReceberControllers.ListaDuplicReceberAlterado(String(dataFormatted));
+          const createDuplicReceber = await DuplicReceberControllers.ListaDuplicReceberCriado(String(dataFormatted));
+
+          const duplic_receber = {
+            created:updateDuplicReceber,
+            updated:createDuplicReceber,
+            deleted: [],
+          }
+
           return response.status(200).json({
             latestVersion: new Date().getTime(),
             changes: {
                 clientes,
                 produtos,
-                condicoes_pagamento
+                condicoes_pagamento,
+                duplic_receber
             }
           });
 
