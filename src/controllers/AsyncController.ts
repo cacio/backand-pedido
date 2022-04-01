@@ -72,8 +72,8 @@ export default{
           const createDuplicReceber = await DuplicReceberControllers.ListaDuplicReceberCriado(String(dataFormatted));
 
           const duplic_receber = {
-            created:updateDuplicReceber,
-            updated:createDuplicReceber,
+            created:createDuplicReceber,
+            updated:updateDuplicReceber,
             deleted: [],
           }
 
