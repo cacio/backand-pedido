@@ -12,8 +12,10 @@ export default{
         const { lastPulledVersion } = request.query;    
 
         let dataFormatted = "";
-        //console.log(lastPulledVersion);
-        if(lastPulledVersion != "null"){
+        
+        console.log(lastPulledVersion);
+
+        if(lastPulledVersion != "0"){
           //console.log('entro aqui');
           const datalastpull = new Date(Number(lastPulledVersion));
          
