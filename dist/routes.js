@@ -12,6 +12,7 @@ const AsyncController_1 = __importDefault(require("./controllers/AsyncController
 const ProdutoControllers_1 = __importDefault(require("./controllers/ProdutoControllers"));
 const CondicoesPagamentoController_1 = __importDefault(require("./controllers/CondicoesPagamentoController"));
 const DuplicReceberControllers_1 = __importDefault(require("./controllers/DuplicReceberControllers"));
+const PedidoController_1 = __importDefault(require("./controllers/PedidoController"));
 const routes = (0, express_1.Router)();
 /*
 * Usuario
@@ -42,4 +43,8 @@ routes.post('/condicoes_pagamento', CondicoesPagamentoController_1.default.creat
 */
 routes.get('/duplicreceber', DuplicReceberControllers_1.default.Index);
 routes.post('/duplicreceber', DuplicReceberControllers_1.default.create);
+/*
+* Pedido
+*/
+routes.post('/pedido/async', PedidoController_1.default.AsyncCreate);
 exports.default = routes;

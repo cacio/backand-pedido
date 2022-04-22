@@ -29,5 +29,17 @@ exports.default = {
         const duplicrecebers = duplicreceberRepository.create(data);
         await duplicreceberRepository.save(duplicrecebers);
         return response.status(201).json(duplicrecebers);
+    },
+    async ListaDuplicReceberAlterado(lastPulledVersion) {
+        const duplicreceberRepository = (0, typeorm_1.getRepository)(DuplicReceber_1.default);
+        const duplicreceberAlterado = await duplicreceberRepository.createQueryBuilder().where("updated_at >= :lastPulledVersion AND updated_at <> created_at", { lastPulledVersion }).getMany();
+        return DuplicReceber_view_1.default.renderMany(duplicreceberAlterado);
+    },
+    async ListaDuplicReceberCriado(lastPulledVersion) {
+        const duplicreceberRepository = (0, typeorm_1.getRepository)(DuplicReceber_1.default);
+        const duplicreceberCriado = await duplicreceberRepository.find({
+            created_at: (0, typeorm_1.MoreThan)(lastPulledVersion)
+        });
+        return DuplicReceber_view_1.default.renderMany(duplicreceberCriado);
     }
 };

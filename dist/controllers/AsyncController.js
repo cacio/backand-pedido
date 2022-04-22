@@ -6,13 +6,14 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const ClientesControllers_1 = __importDefault(require("./ClientesControllers"));
 const CondicoesPagamentoController_1 = __importDefault(require("./CondicoesPagamentoController"));
 const ProdutoControllers_1 = __importDefault(require("./ProdutoControllers"));
+const DuplicReceberControllers_1 = __importDefault(require("./DuplicReceberControllers"));
 const moment_1 = __importDefault(require("moment"));
 exports.default = {
     async asyncClientes(request, response) {
         const { lastPulledVersion } = request.query;
         let dataFormatted = "";
-        //console.log(lastPulledVersion);
-        if (lastPulledVersion != "null") {
+        console.log(lastPulledVersion);
+        if (lastPulledVersion != "0") {
             //console.log('entro aqui');
             const datalastpull = new Date(Number(lastPulledVersion));
             let formattedDate = ((0, moment_1.default)(datalastpull)).format('YYYY-MM-DD HH:mm:ss');
@@ -52,12 +53,23 @@ exports.default = {
             updated: updateCondicoespagamento,
             deleted: [],
         };
+        /**
+          Dados de Duplictas a receber
+        */
+        const updateDuplicReceber = await DuplicReceberControllers_1.default.ListaDuplicReceberAlterado(String(dataFormatted));
+        const createDuplicReceber = await DuplicReceberControllers_1.default.ListaDuplicReceberCriado(String(dataFormatted));
+        const duplic_receber = {
+            created: createDuplicReceber,
+            updated: updateDuplicReceber,
+            deleted: [],
+        };
         return response.status(200).json({
             latestVersion: new Date().getTime(),
             changes: {
                 clientes,
                 produtos,
-                condicoes_pagamento
+                condicoes_pagamento,
+                duplic_receber
             }
         });
     },

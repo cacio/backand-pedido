@@ -7,6 +7,7 @@ import AsyncController from './controllers/AsyncController';
 import ProdutoControllers from './controllers/ProdutoControllers';
 import CondicoesPagamentoController from './controllers/CondicoesPagamentoController';
 import DuplicReceberControllers from './controllers/DuplicReceberControllers';
+import PedidoController from './controllers/PedidoController';
 
 const routes = Router();
 
@@ -43,5 +44,10 @@ routes.post('/condicoes_pagamento',CondicoesPagamentoController.create);
 */
 routes.get('/duplicreceber',DuplicReceberControllers.Index);
 routes.post('/duplicreceber', DuplicReceberControllers.create);
+
+/*
+* Pedido
+*/
+routes.post('/pedido/async', PedidoController.AsyncCreate);
 
 export default routes;
