@@ -19,6 +19,5 @@ export default{
         const { created,updated } = request.body;
 
         console.log(created);
-
     }
 }
