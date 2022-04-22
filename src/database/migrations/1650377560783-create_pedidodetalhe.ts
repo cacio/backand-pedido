@@ -1,7 +1,7 @@
 import {MigrationInterface, QueryRunner, Table} from "typeorm";
 
 export class createPedidodetalhe1650377560783 implements MigrationInterface {
-
+    
     public async up(queryRunner: QueryRunner): Promise<void> {
         await queryRunner.createTable(new Table({
             name:"pedidodetalhe",
