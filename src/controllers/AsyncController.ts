@@ -27,7 +27,7 @@ export default{
           console.log('entro aqui 2');
           const datalastpull = new Date();
           let formattedDate = (moment(datalastpull)).format('YYYY-MM-DD');
-            //console.log(formattedDate);
+           console.log(formattedDate);
            dataFormatted = formattedDate+' 00:00:00';
         }
         
