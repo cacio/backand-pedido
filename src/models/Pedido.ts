@@ -23,7 +23,7 @@ export default class Pedido{
     data_entrega:Date;
 
     @Column()
-    hora_pedido:TimeRanges;
+    hora_pedido:Date;
 
     @Column()
     codigo_usuario:string;
