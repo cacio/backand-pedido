@@ -44,7 +44,7 @@ __decorate([
 ], Pedido.prototype, "data_entrega", void 0);
 __decorate([
     (0, typeorm_1.Column)(),
-    __metadata("design:type", TimeRanges)
+    __metadata("design:type", Date)
 ], Pedido.prototype, "hora_pedido", void 0);
 __decorate([
     (0, typeorm_1.Column)(),
