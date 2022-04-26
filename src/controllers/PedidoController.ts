@@ -19,5 +19,7 @@ export default{
         const { created,updated } = request.body;
 
         console.log(created);
+
+        return response.status(201).json({response:'teste'});
     }
 }
