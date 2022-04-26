@@ -8,8 +8,8 @@ exports.default = {
     async create(request, response) {
     },
     async AsyncCreate(request, response) {
-        const { created, updated } = request.body;
-        console.log(created);
+        const data = request.body;
+        console.log(data);
         return response.status(201).json({ response: 'teste' });
     }
 };

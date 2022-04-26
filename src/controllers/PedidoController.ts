@@ -16,9 +16,9 @@ export default{
 
     },
     async AsyncCreate(request: Request,response: Response){
-        const { created,updated } = request.body;
+        const data = request.body;
 
-        console.log(created);
+        console.log(data);
 
         return response.status(201).json({response:'teste'});
     }
